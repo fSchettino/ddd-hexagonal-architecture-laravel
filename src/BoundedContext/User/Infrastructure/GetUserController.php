@@ -5,7 +5,9 @@ declare(strict_types = 1);
 namespace Src\BoundedContext\User\Infrastructure;
 
 use Illuminate\Http\Request;
-use Src\BoundedContext\User\Application\GetUserUseCase;
+use Src\BoundedContext\User\Application\Get\GetUserCommand;
+use Src\BoundedContext\User\Application\Get\GetUserCommandHandler;
+use Src\BoundedContext\User\Application\Get\GetUserUseCase;
 use Src\BoundedContext\User\Infrastructure\Repositories\EloquentUserRepository;
 use Src\BoundedContext\User\Infrastructure\Resources\UserResource;
 
@@ -23,7 +25,9 @@ final class GetUserController
         $userId = (int)$request->id;
 
         $getUserUseCase = new GetUserUseCase($this->repository);
-        $user = $getUserUseCase->__invoke($userId);
+        $getUserCommand = new GetUserCommand($userId);
+        $getUserCommandHandler = new GetUserCommandHandler($getUserUseCase);
+        $user = $getUserCommandHandler->__invoke($getUserCommand);
 
         return new UserResource($user);
     }

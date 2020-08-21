@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Src\BoundedContext\User\Application;
+namespace Src\BoundedContext\User\Application\Get;
 
 use Src\BoundedContext\User\Domain\Contracts\UserRepositoryContract;
 use Src\BoundedContext\User\Domain\User;
@@ -17,10 +17,8 @@ final class GetUserUseCase
         $this->repository = $repository;
     }
 
-    public function __invoke(int $userId): ?User
+    public function __invoke(UserId $id): ?User
     {
-        $id = new UserId($userId);
-
         $user = $this->repository->find($id);
 
         return $user;

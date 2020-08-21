@@ -2,18 +2,18 @@
 
 declare(strict_types = 1);
 
-namespace Src\BoundedContext\User\Application;
+namespace Src\BoundedContext\User\Application\Update;
 
-use DateTime;
 use Src\BoundedContext\User\Domain\Contracts\UserRepositoryContract;
 use Src\BoundedContext\User\Domain\User;
 use Src\BoundedContext\User\Domain\ValueObjects\UserEmail;
 use Src\BoundedContext\User\Domain\ValueObjects\UserEmailVerifiedDate;
+use Src\BoundedContext\User\Domain\ValueObjects\UserId;
 use Src\BoundedContext\User\Domain\ValueObjects\UserName;
 use Src\BoundedContext\User\Domain\ValueObjects\UserPassword;
 use Src\BoundedContext\User\Domain\ValueObjects\UserRememberToken;
 
-final class CreateUserUseCase
+final class UpdateUserUseCase
 {
     private $repository;
 
@@ -23,21 +23,16 @@ final class CreateUserUseCase
     }
 
     public function __invoke(
-        string $userName,
-        string $userEmail,
-        ?DateTime $userEmailVerifiedDate,
-        string $userPassword,
-        ?string $userRememberToken
+        UserId $id,
+        UserName $name,
+        UserEmail $email,
+        UserEmailVerifiedDate $emailVerifiedDate,
+        UserPassword $password,
+        UserRememberToken $rememberToken
     ): void
     {
-        $name = new UserName($userName);
-        $email = new UserEmail($userEmail);
-        $emailVerifiedDate = new UserEmailVerifiedDate($userEmailVerifiedDate);
-        $password = new UserPassword($userPassword);
-        $rememberToken = new UserRememberToken($userRememberToken);
-
         $user = User::create($name, $email, $emailVerifiedDate, $password, $rememberToken);
 
-        $this->repository->save($user);
+        $this->repository->update($id, $user);
     }
 }

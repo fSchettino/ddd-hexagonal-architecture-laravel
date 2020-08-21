@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Src\BoundedContext\User\Application;
+namespace Src\BoundedContext\User\Application\Get;
 
 use Src\BoundedContext\User\Domain\Contracts\UserRepositoryContract;
 use Src\BoundedContext\User\Domain\User;
@@ -18,11 +18,8 @@ final class GetUserByCriteriaUseCase
         $this->repository = $repository;
     }
 
-    public function __invoke(string $userName, string $userEmail): ?User
+    public function __invoke(UserName $name, UserEmail $email): ?User
     {
-        $name = new UserName($userName);
-        $email = new UserEmail($userEmail);
-
         $user = $this->repository->findByCriteria($name, $email);
 
         return $user;

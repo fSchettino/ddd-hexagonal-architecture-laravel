@@ -6,8 +6,12 @@ namespace Src\BoundedContext\User\Infrastructure;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Src\BoundedContext\User\Application\CreateUserUseCase;
-use Src\BoundedContext\User\Application\GetUserByCriteriaUseCase;
+use Src\BoundedContext\User\Application\Create\CreateUserCommand;
+use Src\BoundedContext\User\Application\Create\CreateUserCommandHandler;
+use Src\BoundedContext\User\Application\Create\CreateUserUseCase;
+use Src\BoundedContext\User\Application\Get\GetUserByCriteriaCommand;
+use Src\BoundedContext\User\Application\Get\GetUserByCriteriaCommandHandler;
+use Src\BoundedContext\User\Application\Get\GetUserByCriteriaUseCase;
 use Src\BoundedContext\User\Infrastructure\Repositories\EloquentUserRepository;
 use Src\BoundedContext\User\Infrastructure\Resources\UserResource;
 
@@ -29,16 +33,20 @@ final class CreateUserController
         $userRememberToken = null;
 
         $createUserUseCase = new CreateUserUseCase($this->repository);
-        $createUserUseCase->__invoke(
+        $createUserCommand = new CreateUserCommand(
             $userName,
             $userEmail,
             $userEmailVerifiedDate,
             $userPassword,
             $userRememberToken
         );
+        $createUserCommandHandler = new CreateUserCommandHandler($createUserUseCase);
+        $createUserCommandHandler->__invoke($createUserCommand);
 
         $getUserByCriteriaUseCase = new GetUserByCriteriaUseCase($this->repository);
-        $user = $getUserByCriteriaUseCase->__invoke($userName, $userEmail);
+        $getUserByCriteriaCommand = new GetUserByCriteriaCommand($userName, $userEmail);
+        $getUserByCriteriaCommandHandler = new GetUserByCriteriaCommandHandler($getUserByCriteriaUseCase);
+        $user = $getUserByCriteriaCommandHandler->__invoke($getUserByCriteriaCommand);
 
         return new UserResource($user);
     }

@@ -5,8 +5,12 @@ declare(strict_types = 1);
 namespace Src\BoundedContext\User\Infrastructure;
 
 use Illuminate\Http\Request;
-use Src\BoundedContext\User\Application\GetUserUseCase;
-use Src\BoundedContext\User\Application\UpdateUserUseCase;
+use Src\BoundedContext\User\Application\Get\GetUserCommand;
+use Src\BoundedContext\User\Application\Get\GetUserCommandHandler;
+use Src\BoundedContext\User\Application\Get\GetUserUseCase;
+use Src\BoundedContext\User\Application\Update\UpdateUserCommand;
+use Src\BoundedContext\User\Application\Update\UpdateUserCommandHandler;
+use Src\BoundedContext\User\Application\Update\UpdateUserUseCase;
 use Src\BoundedContext\User\Infrastructure\Repositories\EloquentUserRepository;
 use Src\BoundedContext\User\Infrastructure\Resources\UserResource;
 
@@ -24,7 +28,9 @@ final class UpdateUserController
         $userId = (int)$request->id;
 
         $getUserUseCase = new GetUserUseCase($this->repository);
-        $user = $getUserUseCase->__invoke($userId);
+        $getUserCommand = new GetUserCommand($userId);
+        $getUserCommandHandler = new GetUserCommandHandler($getUserUseCase);
+        $user = $getUserCommandHandler->__invoke($getUserCommand);
 
         $userName = $request->input('name') ?? $user->name()->value();
         $userEmail = $request->input('email') ?? $user->email()->value();
@@ -33,15 +39,17 @@ final class UpdateUserController
         $userRememberToken = $user->rememberToken()->value();
 
         $updateUserUseCase = new UpdateUserUseCase($this->repository);
-        $updateUserUseCase->__invoke(
+        $updateUserCommand = new UpdateUserCommand(
             $userId,
             $userName,
             $userEmail,
             $userEmailVerifiedDate,
             $userPassword,
             $userRememberToken);
+        $updateUserCommandHandler = new UpdateUserCommandHandler($updateUserUseCase);
+        $updateUserCommandHandler->__invoke($updateUserCommand);
 
-        $updatedUser = $getUserUseCase->__invoke($userId);
+        $updatedUser = $getUserCommandHandler->__invoke($getUserCommand);
 
         return new UserResource($updatedUser);
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Src\BoundedContext\User\Application;
+namespace Src\BoundedContext\User\Application\Delete;
 
 use Src\BoundedContext\User\Domain\Contracts\UserRepositoryContract;
 use Src\BoundedContext\User\Domain\ValueObjects\UserId;
@@ -16,10 +16,8 @@ final class DeleteUserUseCase
         $this->repository = $repository;
     }
 
-    public function __invoke(int $userId): void
+    public function __invoke(UserId $id): void
     {
-        $id = new UserId($userId);
-
         $this->repository->delete($id);
     }
 }
