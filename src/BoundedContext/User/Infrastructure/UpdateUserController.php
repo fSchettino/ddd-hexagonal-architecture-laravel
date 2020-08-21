@@ -39,7 +39,8 @@ final class UpdateUserController
             $userEmail,
             $userEmailVerifiedDate,
             $userPassword,
-            $userRememberToken);
+            $userRememberToken
+        );
 
         $updatedUser = $getUserUseCase->__invoke($userId);
 
