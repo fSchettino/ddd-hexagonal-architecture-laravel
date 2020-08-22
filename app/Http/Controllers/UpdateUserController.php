@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 
 class UpdateUserController extends Controller
@@ -24,6 +25,8 @@ class UpdateUserController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return response($this->updateUserController->__invoke($request), 200);
+        $updatedUser = new UserResource($this->updateUserController->__invoke($request));
+
+        return response($updatedUser, 200);
     }
 }
