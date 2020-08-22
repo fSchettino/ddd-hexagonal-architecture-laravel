@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Application\Update;
 
@@ -24,12 +24,12 @@ final class UpdateUserCommand
         ?string $rememberToken
     )
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->email = $email;
+        $this->id                = $id;
+        $this->name              = $name;
+        $this->email             = $email;
         $this->emailVerifiedDate = $emailVerifiedDate;
-        $this->password = $password;
-        $this->rememberToken = $rememberToken;
+        $this->password          = $password;
+        $this->rememberToken     = $rememberToken;
     }
 
     public function id(): int

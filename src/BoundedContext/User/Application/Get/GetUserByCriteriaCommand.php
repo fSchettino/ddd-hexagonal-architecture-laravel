@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Application\Get;
 
@@ -16,7 +16,7 @@ final class GetUserByCriteriaCommand implements Command
         string $email
     )
     {
-        $this->name = $name;
+        $this->name  = $name;
         $this->email = $email;
     }
 

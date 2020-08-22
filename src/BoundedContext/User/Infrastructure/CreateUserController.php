@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Infrastructure;
 
@@ -25,14 +25,14 @@ final class CreateUserController
 
     public function __invoke(Request $request)
     {
-        $userName = $request->input('name');
-        $userEmail = $request->input('email');
+        $userName              = $request->input('name');
+        $userEmail             = $request->input('email');
         $userEmailVerifiedDate = null;
-        $userPassword = Hash::make($request->input('password'));
-        $userRememberToken = null;
+        $userPassword          = Hash::make($request->input('password'));
+        $userRememberToken     = null;
 
-        $createUserUseCase = new CreateUserUseCase($this->repository);
-        $createUserCommand = new CreateUserCommand(
+        $createUserUseCase        = new CreateUserUseCase($this->repository);
+        $createUserCommand        = new CreateUserCommand(
             $userName,
             $userEmail,
             $userEmailVerifiedDate,
@@ -42,10 +42,10 @@ final class CreateUserController
         $createUserCommandHandler = new CreateUserCommandHandler($createUserUseCase);
         $createUserCommandHandler->__invoke($createUserCommand);
 
-        $getUserByCriteriaUseCase = new GetUserByCriteriaUseCase($this->repository);
-        $getUserByCriteriaCommand = new GetUserByCriteriaCommand($userName, $userEmail);
+        $getUserByCriteriaUseCase        = new GetUserByCriteriaUseCase($this->repository);
+        $getUserByCriteriaCommand        = new GetUserByCriteriaCommand($userName, $userEmail);
         $getUserByCriteriaCommandHandler = new GetUserByCriteriaCommandHandler($getUserByCriteriaUseCase);
-        $newUser = $getUserByCriteriaCommandHandler->__invoke($getUserByCriteriaCommand);
+        $newUser                         = $getUserByCriteriaCommandHandler->__invoke($getUserByCriteriaCommand);
 
         return $newUser;
     }

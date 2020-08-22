@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Application\Get;
 
@@ -20,7 +20,7 @@ final class GetUserByCriteriaCommandHandler implements CommandHandler
 
     public function __invoke(GetUserByCriteriaCommand $command): User
     {
-        $name = new UserName($command->name());
+        $name  = new UserName($command->name());
         $email = new UserEmail($command->email());
 
         $user = $this->getUserByCriteriaUseCase->__invoke($name, $email);

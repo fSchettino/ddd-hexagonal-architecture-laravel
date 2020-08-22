@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Infrastructure;
 
@@ -21,13 +21,13 @@ final class GetUserByCriteriaController
 
     public function __invoke(Request $request)
     {
-        $userName = $request->input('name');
+        $userName  = $request->input('name');
         $userEmail = $request->input('email');
 
-        $getUserByCriteriaUseCase = new GetUserByCriteriaUseCase($this->repository);
-        $getUserByCriteriaCommand = new GetUserByCriteriaCommand($userName, $userEmail);
+        $getUserByCriteriaUseCase        = new GetUserByCriteriaUseCase($this->repository);
+        $getUserByCriteriaCommand        = new GetUserByCriteriaCommand($userName, $userEmail);
         $getUserByCriteriaCommandHandler = new GetUserByCriteriaCommandHandler($getUserByCriteriaUseCase);
-        $user = $getUserByCriteriaCommandHandler->__invoke($getUserByCriteriaCommand);
+        $user                            = $getUserByCriteriaCommandHandler->__invoke($getUserByCriteriaCommand);
 
         return $user;
     }

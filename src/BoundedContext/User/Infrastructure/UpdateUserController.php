@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Infrastructure;
 
@@ -26,19 +26,19 @@ final class UpdateUserController
     {
         $userId = (int)$request->id;
 
-        $getUserUseCase = new GetUserUseCase($this->repository);
-        $getUserCommand = new GetUserCommand($userId);
+        $getUserUseCase        = new GetUserUseCase($this->repository);
+        $getUserCommand        = new GetUserCommand($userId);
         $getUserCommandHandler = new GetUserCommandHandler($getUserUseCase);
-        $user = $getUserCommandHandler->__invoke($getUserCommand);
+        $user                  = $getUserCommandHandler->__invoke($getUserCommand);
 
-        $userName = $request->input('name') ?? $user->name()->value();
-        $userEmail = $request->input('email') ?? $user->email()->value();
+        $userName              = $request->input('name') ?? $user->name()->value();
+        $userEmail             = $request->input('email') ?? $user->email()->value();
         $userEmailVerifiedDate = $user->emailVerifiedDate()->value();
-        $userPassword = $user->password()->value();
-        $userRememberToken = $user->rememberToken()->value();
+        $userPassword          = $user->password()->value();
+        $userRememberToken     = $user->rememberToken()->value();
 
-        $updateUserUseCase = new UpdateUserUseCase($this->repository);
-        $updateUserCommand = new UpdateUserCommand(
+        $updateUserUseCase        = new UpdateUserUseCase($this->repository);
+        $updateUserCommand        = new UpdateUserCommand(
             $userId,
             $userName,
             $userEmail,

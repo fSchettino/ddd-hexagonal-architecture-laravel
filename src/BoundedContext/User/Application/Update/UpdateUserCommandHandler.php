@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Application\Update;
 
@@ -23,12 +23,12 @@ final class UpdateUserCommandHandler implements CommandHandler
 
     public function __invoke(UpdateUserCommand $command): void
     {
-        $id = new UserId($command->id());
-        $name = new UserName($command->name());
-        $email = new UserEmail($command->email());
+        $id                = new UserId($command->id());
+        $name              = new UserName($command->name());
+        $email             = new UserEmail($command->email());
         $emailVerifiedDate = new UserEmailVerifiedDate($command->emailVerifiedDate());
-        $password = new UserPassword($command->password());
-        $rememberToken = new UserRememberToken($command->rememberToken());
+        $password          = new UserPassword($command->password());
+        $rememberToken     = new UserRememberToken($command->rememberToken());
 
         $this->updateUserUseCase->__invoke($id, $name, $email, $emailVerifiedDate, $password, $rememberToken);
     }

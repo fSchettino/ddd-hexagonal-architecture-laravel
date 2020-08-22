@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Application\Create;
 
@@ -22,11 +22,11 @@ final class CreateUserCommandHandler implements CommandHandler
 
     public function __invoke(CreateUserCommand $command): void
     {
-        $name = new UserName($command->name());
-        $email = new UserEmail($command->email());
+        $name              = new UserName($command->name());
+        $email             = new UserEmail($command->email());
         $emailVerifiedDate = new UserEmailVerifiedDate($command->emailVerifiedDate());
-        $password = new UserPassword($command->password());
-        $rememberToken = new UserRememberToken($command->rememberToken());
+        $password          = new UserPassword($command->password());
+        $rememberToken     = new UserRememberToken($command->rememberToken());
 
         $this->createUserUseCase->__invoke($name, $email, $emailVerifiedDate, $password, $rememberToken);
     }

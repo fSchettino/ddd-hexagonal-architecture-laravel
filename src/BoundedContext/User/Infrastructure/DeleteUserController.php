@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Infrastructure;
 
@@ -23,8 +23,8 @@ final class DeleteUserController
     {
         $userId = (int)$request->id;
 
-        $deleteUserUseCase = new DeleteUserUseCase($this->repository);
-        $deleteUserCommand = new DeleteUserCommand($userId);
+        $deleteUserUseCase        = new DeleteUserUseCase($this->repository);
+        $deleteUserCommand        = new DeleteUserCommand($userId);
         $deleteUserCommandHandler = new DeleteUserCommandHandler($deleteUserUseCase);
         $deleteUserCommandHandler->__invoke($deleteUserCommand);
     }

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Application\Create;
 
@@ -23,11 +23,11 @@ final class CreateUserCommand implements Command
         ?string $rememberToken
     )
     {
-        $this->name = $name;
-        $this->email = $email;
+        $this->name              = $name;
+        $this->email             = $email;
         $this->emailVerifiedDate = $emailVerifiedDate;
-        $this->password = $password;
-        $this->rememberToken = $rememberToken;
+        $this->password          = $password;
+        $this->rememberToken     = $rememberToken;
     }
 
     public function name(): string
