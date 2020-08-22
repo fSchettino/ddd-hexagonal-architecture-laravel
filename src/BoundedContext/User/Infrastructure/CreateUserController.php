@@ -13,7 +13,6 @@ use Src\BoundedContext\User\Application\Get\GetUserByCriteriaCommand;
 use Src\BoundedContext\User\Application\Get\GetUserByCriteriaCommandHandler;
 use Src\BoundedContext\User\Application\Get\GetUserByCriteriaUseCase;
 use Src\BoundedContext\User\Infrastructure\Repositories\EloquentUserRepository;
-use Src\BoundedContext\User\Infrastructure\Resources\UserResource;
 
 final class CreateUserController
 {
@@ -46,8 +45,8 @@ final class CreateUserController
         $getUserByCriteriaUseCase = new GetUserByCriteriaUseCase($this->repository);
         $getUserByCriteriaCommand = new GetUserByCriteriaCommand($userName, $userEmail);
         $getUserByCriteriaCommandHandler = new GetUserByCriteriaCommandHandler($getUserByCriteriaUseCase);
-        $user = $getUserByCriteriaCommandHandler->__invoke($getUserByCriteriaCommand);
+        $newUser = $getUserByCriteriaCommandHandler->__invoke($getUserByCriteriaCommand);
 
-        return new UserResource($user);
+        return $newUser;
     }
 }

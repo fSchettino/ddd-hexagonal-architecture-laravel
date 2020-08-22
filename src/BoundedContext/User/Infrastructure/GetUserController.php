@@ -9,7 +9,6 @@ use Src\BoundedContext\User\Application\Get\GetUserCommand;
 use Src\BoundedContext\User\Application\Get\GetUserCommandHandler;
 use Src\BoundedContext\User\Application\Get\GetUserUseCase;
 use Src\BoundedContext\User\Infrastructure\Repositories\EloquentUserRepository;
-use Src\BoundedContext\User\Infrastructure\Resources\UserResource;
 
 final class GetUserController
 {
@@ -29,6 +28,6 @@ final class GetUserController
         $getUserCommandHandler = new GetUserCommandHandler($getUserUseCase);
         $user = $getUserCommandHandler->__invoke($getUserCommand);
 
-        return new UserResource($user);
+        return $user;
     }
 }

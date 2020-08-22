@@ -12,7 +12,6 @@ use Src\BoundedContext\User\Application\Update\UpdateUserCommand;
 use Src\BoundedContext\User\Application\Update\UpdateUserCommandHandler;
 use Src\BoundedContext\User\Application\Update\UpdateUserUseCase;
 use Src\BoundedContext\User\Infrastructure\Repositories\EloquentUserRepository;
-use Src\BoundedContext\User\Infrastructure\Resources\UserResource;
 
 final class UpdateUserController
 {
@@ -51,6 +50,6 @@ final class UpdateUserController
 
         $updatedUser = $getUserCommandHandler->__invoke($getUserCommand);
 
-        return new UserResource($updatedUser);
+        return $updatedUser;
     }
 }
