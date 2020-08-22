@@ -7,7 +7,6 @@ namespace Src\BoundedContext\User\Infrastructure;
 use Illuminate\Http\Request;
 use Src\BoundedContext\User\Application\GetUserByCriteriaUseCase;
 use Src\BoundedContext\User\Infrastructure\Repositories\EloquentUserRepository;
-use Src\BoundedContext\User\Infrastructure\Resources\UserResource;
 
 final class GetUserByCriteriaController
 {
@@ -26,6 +25,6 @@ final class GetUserByCriteriaController
         $getUserByCriteriaUseCase = new GetUserByCriteriaUseCase($this->repository);
         $user = $getUserByCriteriaUseCase->__invoke($userName, $userEmail);
 
-        return new UserResource($user);
+        return $user;
     }
 }

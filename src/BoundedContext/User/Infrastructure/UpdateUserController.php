@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Src\BoundedContext\User\Application\GetUserUseCase;
 use Src\BoundedContext\User\Application\UpdateUserUseCase;
 use Src\BoundedContext\User\Infrastructure\Repositories\EloquentUserRepository;
-use Src\BoundedContext\User\Infrastructure\Resources\UserResource;
 
 final class UpdateUserController
 {
@@ -44,6 +43,6 @@ final class UpdateUserController
 
         $updatedUser = $getUserUseCase->__invoke($userId);
 
-        return new UserResource($updatedUser);
+        return $updatedUser;
     }
 }

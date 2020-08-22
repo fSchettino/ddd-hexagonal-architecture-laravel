@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 use Src\BoundedContext\User\Application\CreateUserUseCase;
 use Src\BoundedContext\User\Application\GetUserByCriteriaUseCase;
 use Src\BoundedContext\User\Infrastructure\Repositories\EloquentUserRepository;
-use Src\BoundedContext\User\Infrastructure\Resources\UserResource;
 
 final class CreateUserController
 {
@@ -38,8 +37,8 @@ final class CreateUserController
         );
 
         $getUserByCriteriaUseCase = new GetUserByCriteriaUseCase($this->repository);
-        $user = $getUserByCriteriaUseCase->__invoke($userName, $userEmail);
+        $newUser = $getUserByCriteriaUseCase->__invoke($userName, $userEmail);
 
-        return new UserResource($user);
+        return $newUser;
     }
 }

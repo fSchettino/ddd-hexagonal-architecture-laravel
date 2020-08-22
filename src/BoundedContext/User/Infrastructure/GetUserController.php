@@ -7,7 +7,6 @@ namespace Src\BoundedContext\User\Infrastructure;
 use Illuminate\Http\Request;
 use Src\BoundedContext\User\Application\GetUserUseCase;
 use Src\BoundedContext\User\Infrastructure\Repositories\EloquentUserRepository;
-use Src\BoundedContext\User\Infrastructure\Resources\UserResource;
 
 final class GetUserController
 {
@@ -25,6 +24,6 @@ final class GetUserController
         $getUserUseCase = new GetUserUseCase($this->repository);
         $user = $getUserUseCase->__invoke($userId);
 
-        return new UserResource($user);
+        return $user;
     }
 }
