@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Infrastructure;
 
@@ -22,7 +22,7 @@ final class GetUserController
         $userId = (int)$request->id;
 
         $getUserUseCase = new GetUserUseCase($this->repository);
-        $user = $getUserUseCase->__invoke($userId);
+        $user           = $getUserUseCase->__invoke($userId);
 
         return $user;
     }

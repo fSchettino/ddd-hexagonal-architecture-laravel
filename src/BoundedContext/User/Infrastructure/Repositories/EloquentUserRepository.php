@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Infrastructure\Repositories;
 
@@ -59,11 +59,11 @@ final class EloquentUserRepository implements UserRepositoryContract
         $newUser = $this->eloquentUserModel;
 
         $data = [
-            'name' => $user->name()->value(),
-            'email' => $user->email()->value(),
+            'name'              => $user->name()->value(),
+            'email'             => $user->email()->value(),
             'email_verified_at' => $user->emailVerifiedDate()->value(),
-            'password' => $user->password()->value(),
-            'remember_token' => $user->rememberToken()->value(),
+            'password'          => $user->password()->value(),
+            'remember_token'    => $user->rememberToken()->value(),
         ];
 
         $newUser->create($data);
@@ -74,7 +74,7 @@ final class EloquentUserRepository implements UserRepositoryContract
         $userToUpdate = $this->eloquentUserModel;
 
         $data = [
-            'name' => $user->name()->value(),
+            'name'  => $user->name()->value(),
             'email' => $user->email()->value(),
         ];
 

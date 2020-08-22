@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Application;
 
@@ -32,12 +32,12 @@ final class UpdateUserUseCase
         ?string $userRememberToken
     ): void
     {
-        $id = new UserId($userId);
-        $name = new UserName($userName);
-        $email = new UserEmail($userEmail);
+        $id                = new UserId($userId);
+        $name              = new UserName($userName);
+        $email             = new UserEmail($userEmail);
         $emailVerifiedDate = new UserEmailVerifiedDate($userEmailVerifiedDate);
-        $password = new UserPassword($userPassword);
-        $rememberToken = new UserRememberToken($userRememberToken);
+        $password          = new UserPassword($userPassword);
+        $rememberToken     = new UserRememberToken($userRememberToken);
 
         $user = User::create($name, $email, $emailVerifiedDate, $password, $rememberToken);
 

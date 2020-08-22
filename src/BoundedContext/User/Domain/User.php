@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Domain;
 
@@ -26,11 +26,11 @@ final class User
         UserRememberToken $rememberToken
     )
     {
-        $this->name = $name;
-        $this->email = $email;
+        $this->name              = $name;
+        $this->email             = $email;
         $this->emailVerifiedDate = $emailVerifiedDate;
-        $this->password = $password;
-        $this->rememberToken = $rememberToken;
+        $this->password          = $password;
+        $this->rememberToken     = $rememberToken;
     }
 
     public function name(): UserName

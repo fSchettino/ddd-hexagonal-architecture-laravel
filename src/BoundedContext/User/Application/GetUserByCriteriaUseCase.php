@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Application;
 
@@ -20,7 +20,7 @@ final class GetUserByCriteriaUseCase
 
     public function __invoke(string $userName, string $userEmail): ?User
     {
-        $name = new UserName($userName);
+        $name  = new UserName($userName);
         $email = new UserEmail($userEmail);
 
         $user = $this->repository->findByCriteria($name, $email);

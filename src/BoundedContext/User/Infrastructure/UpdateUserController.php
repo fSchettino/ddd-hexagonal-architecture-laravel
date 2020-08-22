@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Infrastructure;
 
@@ -23,13 +23,13 @@ final class UpdateUserController
         $userId = (int)$request->id;
 
         $getUserUseCase = new GetUserUseCase($this->repository);
-        $user = $getUserUseCase->__invoke($userId);
+        $user           = $getUserUseCase->__invoke($userId);
 
-        $userName = $request->input('name') ?? $user->name()->value();
-        $userEmail = $request->input('email') ?? $user->email()->value();
+        $userName              = $request->input('name') ?? $user->name()->value();
+        $userEmail             = $request->input('email') ?? $user->email()->value();
         $userEmailVerifiedDate = $user->emailVerifiedDate()->value();
-        $userPassword = $user->password()->value();
-        $userRememberToken = $user->rememberToken()->value();
+        $userPassword          = $user->password()->value();
+        $userRememberToken     = $user->rememberToken()->value();
 
         $updateUserUseCase = new UpdateUserUseCase($this->repository);
         $updateUserUseCase->__invoke(

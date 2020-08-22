@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Src\BoundedContext\User\Infrastructure;
 
@@ -21,11 +21,11 @@ final class CreateUserController
 
     public function __invoke(Request $request)
     {
-        $userName = $request->input('name');
-        $userEmail = $request->input('email');
+        $userName              = $request->input('name');
+        $userEmail             = $request->input('email');
         $userEmailVerifiedDate = null;
-        $userPassword = Hash::make($request->input('password'));
-        $userRememberToken = null;
+        $userPassword          = Hash::make($request->input('password'));
+        $userRememberToken     = null;
 
         $createUserUseCase = new CreateUserUseCase($this->repository);
         $createUserUseCase->__invoke(
@@ -37,7 +37,7 @@ final class CreateUserController
         );
 
         $getUserByCriteriaUseCase = new GetUserByCriteriaUseCase($this->repository);
-        $newUser = $getUserByCriteriaUseCase->__invoke($userName, $userEmail);
+        $newUser                  = $getUserByCriteriaUseCase->__invoke($userName, $userEmail);
 
         return $newUser;
     }
